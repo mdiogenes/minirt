@@ -6,12 +6,13 @@
 #    By: msoler-e <msoler-e@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/27 12:18:28 by msoler-e          #+#    #+#              #
-#    Updated: 2022/10/27 13:01:29 by msoler-e         ###   ########.fr        #
+#    Updated: 2022/11/25 12:26:47 by msoler-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS_FILES		=	main.c \
-					ft_error.c
+					ft_error.c \
+					hooks.c
 SRCS_DIR		=	srcs
 OBJS_DIR		=	obj
 OBJS_SUBS		= 	obj

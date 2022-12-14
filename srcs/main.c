@@ -6,7 +6,7 @@
 /*   By: msoler-e <msoler-e@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:35:54 by msoler-e          #+#    #+#             */
-/*   Updated: 2022/10/27 12:36:31 by msoler-e         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:35:55 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,65 +29,58 @@ void	textmenu(t_data *tot)
 	ft_error("\n", 2, tot);
 }
 
-void	ft_init_data(t_data *tot)
+void	menu(char **argv)
 {
-	tot->freeze_julia = 0;
-	tot->fractal = 1;
-	tot->crejulia = -0.7;
-	tot->cimjulia = 0.27015;
-	tot->sx = 1920;
-	tot->sy = 1080;
-	tot->red = 1;
-	tot->freq = 0.3;
-	tot->green = 0;
-	tot->blue = 0;
-	tot->maxitera = 50;
-	tot->trans = 0;
-	tot->zoom = 1;
-	tot->minre = -2.0;
-	tot->maxre = 1.0;
-	tot->minim = -1.2;
-	tot->maxim = tot->minim + (tot->maxre - tot->minre)
-		* ((tot->sx) / (tot->sy));
+	ft_putstr_fd("MENU\n", 1);
+	ft_putstr_fd(argv[1], 1);
 }
 
-void	menu(char **argv, t_data *tot)
+void	ft_init_data(t_data *img)
 {
-	int	option;
-
-	option = ft_atoi(argv[1]);
-	if (option < 1 || option > 3)
-		textmenu(tot);
-	if (option == 1)
-	{
-		tot->fractal = 1;
-		tot->maxre = 1.0;
-		tot->maxim = 1.2;
-	}
-	if (option == 2)
-	{
-		tot->maxre = 2.0;
-		tot->fractal = 2;	}
-	if (option == 3)
-	{
-		tot->maxre = 1.5;
-		tot->minim = -1.0;
-		tot->fractal = 3;
-	}
+	img->sx = 1920;
+	img->sy = 1080;
+	img->red = 1;
+	img->freq = 0.3;
+	img->green = 0;
+	img->blue = 0;
+	img->trans = 0;
+	img->minre = -2.0;
+	img->maxre = 1.0;
+	img->minim = -1.2;
+	img->maxim = img->minim + (img->maxre - img->minre)
+		* ((img->sx) / (img->sy));
 }
 
 int	main(int argc, char **argv)
 {
-	t_data	tot;
+	t_data	img;
+	int		x;
+	int 	y;
 
-	ft_init_data(&tot);
-	tot.mlx = mlx_init();
-	tot.mlx_win = mlx_new_window(tot.mlx, tot.sx,
-			tot.sy, "miniRT");
-	tot.img = mlx_new_image(tot.mlx, tot.sx, tot.sy);
-	tot.addr = mlx_get_data_addr(tot.img, &tot.bits_per_pixel,
-			&tot.line_length, &tot.endian);
-	if (argc != 2)
-		textmenu(&tot);
-	menu(argv, &tot);
+	x = 0;
+	ft_init_data(&img);
+	img.mlx = mlx_init();
+	img.mlx_win = mlx_new_window(img.mlx, img.sx,
+			img.sy, "miniRT");
+	img.img = mlx_new_image(img.mlx, img.sx, img.sy);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
+			&img.line_length, &img.endian);
+	while (x < 10)
+	{
+		y = 0;
+		while (y < 10)
+		{
+			my_mlx_pixel_put(&img, x, y, 0x00FF0000);	
+			y = y + 1;
+		}
+		x = x + 1;
+	}
+	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);
+	mlx_hook(img.mlx_win, 2, 1L << 0, ft_hook, img);
+	mlx_loop(img.mlx);
+	if (argc == 2)
+	{
+		textmenu(&img);
+		menu(argv);
+	}
 }

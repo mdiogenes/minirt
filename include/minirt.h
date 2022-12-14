@@ -6,7 +6,7 @@
 /*   By: msoler-e <msoler-e@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:32:52 by msoler-e          #+#    #+#             */
-/*   Updated: 2022/10/27 11:32:55 by msoler-e         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:28:45 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,18 @@ typedef struct s_data{
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		sx;
-	int		sy;
-	double	c_im;
-	double	c_re;
+	int		sx; //tamany imatge
+	int		sy;//tamany imatge
 	double	minre;
 	double	maxre;
 	double	minim;
 	double	maxim;
 	double	freq;
-	int		maxitera;
 	int		red;
 	int		green;
 	int		blue;
 	int		trans;
-	double	zoom;
-	double	crejulia;
-	double	cimjulia;
-	int		freeze_julia;
-	int		fractal;
 }	t_data;
 void	ft_error(char *cnt, int error, t_data *tot);
+int		ft_hook(int keycode, t_data *tot);
 #endif

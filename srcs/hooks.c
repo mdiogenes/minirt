@@ -6,10 +6,10 @@
 /*   By: msoler-e <msoler-e@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 09:48:45 by msoler-e          #+#    #+#             */
-/*   Updated: 2022/05/10 11:21:48 by msoler-e         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:36:00 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../include/fractol.h"
+#include "../include/minirt.h"
 
 void	ft_move(int keycode, t_data *tot)
 {
@@ -49,26 +49,6 @@ int	ft_hook(int keycode, t_data *tot)
 {
 	if (keycode == 53)
 		ft_error("\n", 1, tot);
-	if ((keycode == 69) || (keycode == 78) || (keycode == 49))
-		ft_itera(keycode, tot);
-	if (keycode == 18)
-	{
-		tot->freq = 2;
-		tot->blue = 0;
-		tot->red = 1;
-		tot->green = 0;
-	}	
-	if (keycode == 19)
-		ft_blue(tot);
-	if (keycode == 20)
-		ft_green(tot);
-	if ((keycode >= 123) && (keycode <= 126))
-		ft_move(keycode, tot);
-	if (tot->fractal == 2)
-		ft_fractaljulia(tot);
-	if (tot->fractal == 3)
-		ft_fractolburnship(tot);
-	ft_fractolmandel(tot);
 	return (0);
 }
 
